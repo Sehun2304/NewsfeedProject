@@ -43,4 +43,16 @@ public class PostController {
         model.addAttribute("postUpdate",postDto);
         return"update";
     }
+    @PostMapping("/update")
+    public String update(@ModelAttribute PostDto postDto, Model model){
+        PostDto post = postService.update(postDto);
+        model.addAttribute("post",post);
+        return "detail";
+
+    }
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        postService.delete(id);
+        return "redirect:/post/";
+    }
 }

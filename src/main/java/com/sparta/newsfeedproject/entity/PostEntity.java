@@ -44,6 +44,17 @@ public class PostEntity extends TimeStamped {
         return postEntity;
     }
 
+    public static PostEntity toUpdateEntity(PostDto postDto) {
+        PostEntity postEntity = new PostEntity();
+        postEntity.setId(postDto.getId());
+        postEntity.setPostWriter(postDto.getPostWriter());
+        postEntity.setPassword(postDto.getPassword());
+        postEntity.setTitle(postDto.getTitle());
+        postEntity.setContents(postDto.getContents());
+        postEntity.setPostHits(postDto.getPostHits());
+        return postEntity;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

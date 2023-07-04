@@ -44,4 +44,14 @@ public class PostService {
             return null;
         }
     }
+
+    public PostDto update(PostDto postDto) {
+        PostEntity postEntity = PostEntity.toUpdateEntity(postDto);
+        postRepository.save(postEntity);
+        return findById(postDto.getId());
+    }
+
+    public void delete(Long id) {
+        postRepository.deleteById(id);
+    }
 }
