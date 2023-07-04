@@ -1,0 +1,54 @@
+package com.sparta.newsfeedproject.entity;
+
+import com.sparta.newsfeedproject.dto.PostDto;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.sql.Time;
+
+
+@Entity
+@Getter
+@Setter
+@Table(name = "post_table")
+
+
+public class PostEntity extends TimeStamped {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(length = 20, nullable = false)
+    private String postWriter;
+
+    @Column
+    private String password;
+
+    @Column
+    private String title;
+
+    @Column(length = 500)
+    private String contents;
+
+    @Column
+    private int postHits;
+
+    public static PostEntity toSaveEntity(PostDto postDto){
+        PostEntity postEntity = new PostEntity();
+        postEntity.setPostWriter(postDto.getPostWriter());
+        postEntity.setPassword(postDto.getPassword());
+        postEntity.setTitle(postDto.getTitle());
+        postEntity.setContents(postDto.getContents());
+        postEntity.setPostHits(0);
+        return postEntity;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+}

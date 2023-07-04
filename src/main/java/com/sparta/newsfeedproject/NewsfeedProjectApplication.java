@@ -1,3 +1,4 @@
+
 package com.sparta.newsfeedproject;
 
 import org.springframework.boot.SpringApplication;
