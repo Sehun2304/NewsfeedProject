@@ -1,4 +1,4 @@
-package com.sparta.newsfeedproject.postcontroller;
+package com.sparta.newsfeedproject.controller;
 
 import com.sparta.newsfeedproject.dto.PostDto;
 import com.sparta.newsfeedproject.service.PostService;
