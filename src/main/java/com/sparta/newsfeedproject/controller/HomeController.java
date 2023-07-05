@@ -1,4 +1,4 @@
-package com.sparta.newsfeedproject.postcontroller;
+package com.sparta.newsfeedproject.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
