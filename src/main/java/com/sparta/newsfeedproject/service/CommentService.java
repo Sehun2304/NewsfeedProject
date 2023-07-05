@@ -7,6 +7,9 @@ import com.sparta.newsfeedproject.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class CommentService {
 
@@ -15,6 +18,17 @@ public class CommentService {
     public CommentService(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
     }
+
+    @Deprecated
+    public List<CommentResponseDto> getCommentList() {
+        List<Comment> commentList = commentRepository.findAllByOrderByCreateAtDesc();
+        List<CommentResponseDto> commentResponseDtoList = new ArrayList<>();
+        for (Comment comment : commentList) {
+            commentResponseDtoList.add(new CommentResponseDto(comment));
+        }
+        return commentResponseDtoList;
+    }
+
     public CommentResponseDto createComment(CommentRequestDto commentRequestDto) {
 
         Comment comment = new Comment(commentRequestDto);
@@ -43,8 +57,9 @@ public class CommentService {
         commentRepository.delete(comment);
     }
     private Comment findComment(Long id) {
-        return CommentRepository.findById(id).orElseThrow(() ->
-                new IllegalArgumentException("해당 댓글이 존재하지 않습니다."));
+        return commentRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("댓글이 존재하지 않습니다")
+        );
     }
 
 }
