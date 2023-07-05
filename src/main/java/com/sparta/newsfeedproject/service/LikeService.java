@@ -23,7 +23,7 @@ public class LikeService {
     public String likeBoard(LikeRequestDto likeRequestDTO) {
 
         User user = userRepository.findById(likeRequestDTO.getUserId())
-                .orElseThrow(() -> new NullPointerException("Could not found member id"));
+                .orElseThrow(() -> new NullPointerException("Could not found user id"));
 
         Board board = boardRepository.findById(likeRequestDTO.getBoardId())
                 .orElseThrow(() -> new NullPointerException("Could not found board id"));
@@ -31,17 +31,21 @@ public class LikeService {
         // 이미 해당 게시글에 좋아요를 누른 아이디인지 체크
         if (likeRepository.findByUserAndBoard(user, board) != null){
             Like like = likeRepository.findByUserAndBoard(user,board);
-            board.setLikeCount(board.getLikeCount()-1);
             likeRepository.delete(like);
+
+            Long likeCount = (long)likeRepository.findByBoardId(board.getId()).size();
+            board.setLikeCount(likeCount);
 
             return "좋아요 취소";
         } else {
             Like like = new Like();
             like.setBoard(board);
             like.setUser(user);
-            board.setLikeCount(board.getLikeCount()+1);
-
             likeRepository.save(like);
+
+            Long likeCount = (long)likeRepository.findByBoardId(board.getId()).size();
+            board.setLikeCount(likeCount);
+
             return "좋아요";
         }
 
