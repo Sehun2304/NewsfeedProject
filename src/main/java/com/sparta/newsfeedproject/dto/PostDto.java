@@ -18,6 +18,7 @@ public class PostDto {
     private int postHits;
     private LocalDateTime postCreatedTime;
     private LocalDateTime postUpdatedTime;
+    private Long postLike; // 좋아요 개수
 
     public static PostDto toPostDTO(PostEntity postEntity){
         PostDto postDto = new PostDto();
@@ -29,6 +30,7 @@ public class PostDto {
         postDto.setPostHits(postEntity.getPostHits());
         postDto.setPostCreatedTime(postEntity.getCreatedTime());
         postDto.setPostUpdatedTime(postEntity.getUpdatedTime());
+        postDto.setPostLike(postEntity.getLikeCount()); // 좋아요 개수
         return postDto;
     }
 }
