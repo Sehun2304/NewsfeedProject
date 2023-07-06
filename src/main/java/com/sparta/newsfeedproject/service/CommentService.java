@@ -7,6 +7,9 @@ import com.sparta.newsfeedproject.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class CommentService {
 
@@ -51,4 +54,12 @@ public class CommentService {
         );
     }
 
+
+    public List<CommentResponseDto> getCommentList() {
+            List<Comment> comments = commentRepository.findAll();
+            return comments.stream()
+                    .map(CommentResponseDto::new)
+                    .collect(Collectors.toList());
+
+    }
 }
