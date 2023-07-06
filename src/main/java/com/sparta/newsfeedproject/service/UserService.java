@@ -19,12 +19,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-
-//    public UserService(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
-
-
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
