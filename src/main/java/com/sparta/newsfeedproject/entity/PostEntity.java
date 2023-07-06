@@ -13,7 +13,6 @@ import java.sql.Time;
 @Setter
 @Table(name = "post_table")
 
-
 public class PostEntity extends TimeStamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +32,9 @@ public class PostEntity extends TimeStamped {
 
     @Column
     private int postHits;
+
+    @Column(nullable = false)
+    private Long likeCount;
 
     public static PostEntity toSaveEntity(PostDto postDto){
         PostEntity postEntity = new PostEntity();

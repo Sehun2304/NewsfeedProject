@@ -13,6 +13,7 @@
     <th>writer</th>
     <th>date</th>
     <th>hits</th>
+    <th>likes</th>
   </tr>
   <tr th:each="post: ${postList}">
     <td th:text="${post.id}"></td>
@@ -21,6 +22,7 @@
     <td th:text="${post.postWriter}"></td>
     <td th:text="*{#temporals.format(post.postCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
     <td th:text="${post.postHits}"></td>
+    <td th:text="${post.postLike}"></td>
   </tr>
 </table>
 </body>
