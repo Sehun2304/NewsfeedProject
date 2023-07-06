@@ -14,7 +14,7 @@ public class UserService {
     private static UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+        UserService.userRepository = userRepository;
     }
 
 
@@ -26,7 +26,14 @@ public class UserService {
         User user = new User();
         user.setUsername(registerRequest.getUsername());
         user.setPassword(registerRequest.getPassword());
-        return userRepository.save(user);
+        user.setName(registerRequest.getName());
+        user.setEmail(registerRequest.getEmail());
+        user.setIntroduce(registerRequest.getIntroduce());
+        return saveUser(user);
+    }
+
+    public User saveUser(User user) {
+        return userRepository.save(user); // 저장된 유저 객체 반환
     }
 
 

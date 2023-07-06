@@ -14,7 +14,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
     @Column(nullable = false, unique = true)
     private String username;
 
@@ -34,9 +33,12 @@ public class User {
     }
 
     // 매개변수가 있는 생성자
-    public User(String username, String password) {
+    public User(String username, String password,String name, String email, String introduce) {
         this.username = username;
         this.password = password;
+        this.name = name;
+        this.email = email;
+        this.introduce = introduce;
     }
 
     // Getter methods
@@ -52,6 +54,18 @@ public class User {
         return password;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
     // Setter methods
     public void setId(Long id) {
         this.id = id;
@@ -63,6 +77,18 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
     }
 }
 

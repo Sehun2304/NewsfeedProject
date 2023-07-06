@@ -32,10 +32,11 @@ public class SecurityConfig {
                         formLogin
                                 .loginPage("/login")
                                 .defaultSuccessUrl("/home")
+                                .failureUrl("/login?error")
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login"));
+                        .logoutSuccessUrl("/"));
         return http.build();
     }
     @Bean
