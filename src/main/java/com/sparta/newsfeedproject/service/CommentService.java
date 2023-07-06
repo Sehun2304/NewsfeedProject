@@ -7,9 +7,6 @@ import com.sparta.newsfeedproject.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 public class CommentService {
 
@@ -19,15 +16,7 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
-    @Deprecated
-    public List<CommentResponseDto> getCommentList() {
-        List<Comment> commentList = commentRepository.findAllByOrderByCreateAtDesc();
-        List<CommentResponseDto> commentResponseDtoList = new ArrayList<>();
-        for (Comment comment : commentList) {
-            commentResponseDtoList.add(new CommentResponseDto(comment));
-        }
-        return commentResponseDtoList;
-    }
+
 
     public CommentResponseDto createComment(CommentRequestDto commentRequestDto) {
 

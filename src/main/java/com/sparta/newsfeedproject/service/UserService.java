@@ -31,6 +31,7 @@ public class UserService {
 //        return userRepository.save(user);
 //    }
 
+
     public User register(RegisterRequest request) {
         String username = request.getUsername();
         String password = passwordEncoder.encode(request.getPassword());
@@ -47,6 +48,23 @@ public class UserService {
         // 사용자 등록
         User user = new User(username, password, name, email, introduce);
         return userRepository.save(user);
+
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+    public User register(RegisterRequest registerRequest) {
+        User user = new User();
+        user.setUsername(registerRequest.getUsername());
+        user.setPassword(registerRequest.getPassword());
+        user.setName(registerRequest.getName());
+        user.setEmail(registerRequest.getEmail());
+        user.setIntroduce(registerRequest.getIntroduce());
+        return saveUser(user);
+    }
+
+    public User saveUser(User user) {
+        return userRepository.save(user); // 저장된 유저 객체 반환
+
     }
 
 

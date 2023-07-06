@@ -69,7 +69,9 @@ public class SecurityConfig {
                 )
                 .formLogin(formLogin ->
                         formLogin
-                                .loginPage("/login-page").permitAll()
+                                .loginPage("/login")
+                                .defaultSuccessUrl("/home")
+                                .failureUrl("/login?error")
                 )
 
                 .logout(logout -> logout
@@ -79,6 +81,8 @@ public class SecurityConfig {
         // 필터 관리
         http.addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class);
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
+
 
         return http.build();
     }
