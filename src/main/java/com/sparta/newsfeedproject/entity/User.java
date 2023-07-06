@@ -42,14 +42,6 @@ public class User {
     }
 
 
-    // 매개변수가 있는 생성자
-    public User(String username, String password,String name, String email, String introduce) {
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.email = email;
-        this.introduce = introduce;
-    }
 
     // Getter methods
     public Long getId() {

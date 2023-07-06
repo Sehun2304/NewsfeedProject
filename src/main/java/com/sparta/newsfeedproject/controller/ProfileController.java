@@ -38,7 +38,7 @@ public class ProfileController {
         passService.pwUpdate(id,passUpdateDto);
         return "비밀번호 수정이 완료되었습니다.";
     }
-    }
+}
 
 
 

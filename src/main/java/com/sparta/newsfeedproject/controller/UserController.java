@@ -31,13 +31,7 @@ public class UserController {
     @GetMapping("/login-page")
     public String loginPage() {
         return "login";
-
-    @PostMapping("/registerUser")
-    public String registerUser(@ModelAttribute User user, RedirectAttributes redirectAttributes) {
-        userService.saveUser(user);
-        redirectAttributes.addFlashAttribute("message", "Registration successful");
-        return "redirect:/login";
-
     }
+
 }
 
