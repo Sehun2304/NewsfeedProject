@@ -20,11 +20,9 @@ public class CommentService {
     }
 
 
-
     public CommentResponseDto createComment(CommentRequestDto commentRequestDto) {
 
         Comment comment = new Comment(commentRequestDto);
-
         Comment saveComment = commentRepository.save(comment);
         return new CommentResponseDto(saveComment);
     }
