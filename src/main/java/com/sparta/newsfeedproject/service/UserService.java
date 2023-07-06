@@ -40,7 +40,7 @@ public class UserService {
         String introduce = request.getIntroduce();
 
         //회원 중복 확인 -> 중복된 사용자가 존재하면 가입 x
-        if(userRepository.findByUsername(username) != null) {
+        if (userRepository.findByUsername(username) != null) {
             throw new IllegalArgumentException("중복된 사용자가 존재합니다.");
         }
         // 닉네임, 이메일도 추가적으로 검증이 필요할 것 같음
@@ -48,19 +48,8 @@ public class UserService {
         // 사용자 등록
         User user = new User(username, password, name, email, introduce);
         return userRepository.save(user);
+    }
 
-    public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-    public User register(RegisterRequest registerRequest) {
-        User user = new User();
-        user.setUsername(registerRequest.getUsername());
-        user.setPassword(registerRequest.getPassword());
-        user.setName(registerRequest.getName());
-        user.setEmail(registerRequest.getEmail());
-        user.setIntroduce(registerRequest.getIntroduce());
-        return saveUser(user);
-    }
 
     public User saveUser(User user) {
         return userRepository.save(user); // 저장된 유저 객체 반환
