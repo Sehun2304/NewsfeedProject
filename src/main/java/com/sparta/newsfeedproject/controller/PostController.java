@@ -4,6 +4,7 @@ import com.sparta.newsfeedproject.dto.LikeRequestDto;
 import com.sparta.newsfeedproject.dto.PostDto;
 import com.sparta.newsfeedproject.service.LikeService;
 import com.sparta.newsfeedproject.service.PostService;
+import com.sparta.newsfeedproject.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,12 +28,14 @@ public class PostController {
         postService.save(postDto);
         return "index";
     }
+
     @GetMapping("/")
     public String findAll(Model model){
         List<PostDto> postDtoList = postService.findAll();
         model.addAttribute("postList",postDtoList);
         return "List";
     }
+
     @GetMapping("/{id}")
     public String findById(@PathVariable Long id, Model model){
         postService.updateHits(id);
@@ -40,11 +43,12 @@ public class PostController {
         model.addAttribute("post",postDto);
         return "detail";
     }
+
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable Long id, Model model){
         PostDto postDto = postService.findById(id);
         model.addAttribute("postUpdate",postDto);
-        return"update";
+        return "update";
     }
     @PostMapping("/update")
     public String update(@ModelAttribute PostDto postDto, Model model){
@@ -64,4 +68,5 @@ public class PostController {
         likeService.likeBoard(likeRequestDto);
         return "redirect:/post/";
     }
+
 }

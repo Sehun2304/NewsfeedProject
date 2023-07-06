@@ -15,11 +15,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
+
+    // 게시글 작성
     public void save(PostDto postDto) {
         PostEntity postEntity = PostEntity.toSaveEntity(postDto);
         postRepository.save(postEntity);
     }
 
+    //전체 게시글 조회
     public List<PostDto> findAll() {
         List<PostEntity>postEntityList = postRepository.findAll();
         List<PostDto> postDtoList = new ArrayList<>();
@@ -27,13 +30,14 @@ public class PostService {
             postDtoList.add(PostDto.toPostDTO(postEntity));
         }
         return postDtoList;
-
     }
+
     @Transactional
     public void updateHits(Long id) {
         postRepository.updateHits(id);
     }
 
+    //선택 게시글 조회
     public PostDto findById(Long id) {
         Optional<PostEntity>optionalPostEntity = postRepository.findById(id);
         if(optionalPostEntity.isPresent()){
@@ -44,6 +48,7 @@ public class PostService {
             return null;
         }
     }
+
 
     public PostDto update(PostDto postDto) {
         PostEntity postEntity = PostEntity.toUpdateEntity(postDto);

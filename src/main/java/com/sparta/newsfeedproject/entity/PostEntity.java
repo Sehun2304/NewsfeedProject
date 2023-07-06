@@ -33,7 +33,7 @@ public class PostEntity extends TimeStamped {
     @Column
     private int postHits;
 
-    @Column(nullable = false)
+    @Column
     private Long likeCount;
 
     public static PostEntity toSaveEntity(PostDto postDto){
@@ -43,6 +43,7 @@ public class PostEntity extends TimeStamped {
         postEntity.setTitle(postDto.getTitle());
         postEntity.setContents(postDto.getContents());
         postEntity.setPostHits(0);
+        postEntity.setLikeCount(0L);
         return postEntity;
     }
 

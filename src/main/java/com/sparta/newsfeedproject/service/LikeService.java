@@ -8,6 +8,8 @@ import com.sparta.newsfeedproject.repository.LikeRepository;
 import com.sparta.newsfeedproject.repository.PostRepository;
 import com.sparta.newsfeedproject.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,14 +24,14 @@ public class LikeService {
     @Transactional
     public void likeBoard(LikeRequestDto likeRequestDTO) {
 
-        User user = userRepository.findById(likeRequestDTO.getUserId())
-                .orElseThrow(() -> new NullPointerException("Could not found user id"));
+//        User user = userRepository.findById(likeRequestDTO.getUserId())
+//                .orElseThrow(() -> new NullPointerException("Could not found user id"));
         /**
          * spring security 구현이 완료되면 밑에 주석 처리된 코드로 변경하면 인증된 토큰으로 user를 판단할 수 있을 것 같음
          * 아직은 구현이 안되어 있으므로 위에 있는 코드 사용
          */
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        User user = userRepository.findByUsername(authentication.getName());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByUsername(authentication.getName());
 
         PostEntity post = postRepository.findById(likeRequestDTO.getPostId())
                 .orElseThrow(() -> new NullPointerException("Could not found board id"));
