@@ -16,11 +16,7 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    //조회
-    @GetMapping("/comments")
-    public List<CommentResponseDto> getCommentList() {
-        return commentService.getCommentList();
-    }
+
     //생성
     @PostMapping("/comments")
     public CommentResponseDto createComment(@RequestBody CommentRequestDto commentRequestDto){
