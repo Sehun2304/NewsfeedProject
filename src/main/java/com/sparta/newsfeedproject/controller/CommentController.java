@@ -5,8 +5,6 @@ import com.sparta.newsfeedproject.dto.CommentResponseDto;
 import com.sparta.newsfeedproject.service.CommentService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/post")
 public class CommentController {
