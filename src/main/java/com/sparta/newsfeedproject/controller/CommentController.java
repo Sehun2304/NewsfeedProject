@@ -5,8 +5,6 @@ import com.sparta.newsfeedproject.dto.CommentResponseDto;
 import com.sparta.newsfeedproject.service.CommentService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/post")
 public class CommentController {
@@ -16,11 +14,7 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    //조회
-    @GetMapping("/comments")
-    public List<CommentResponseDto> getCommentList() {
-        return commentService.getCommentList();
-    }
+
     //생성
     @PostMapping("/comments")
     public CommentResponseDto createComment(@RequestBody CommentRequestDto commentRequestDto){
