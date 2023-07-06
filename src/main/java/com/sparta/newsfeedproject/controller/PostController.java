@@ -1,6 +1,8 @@
 package com.sparta.newsfeedproject.controller;
 
+import com.sparta.newsfeedproject.dto.LikeRequestDto;
 import com.sparta.newsfeedproject.dto.PostDto;
+import com.sparta.newsfeedproject.service.LikeService;
 import com.sparta.newsfeedproject.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import java.util.List;
 @RequestMapping("/post")
 public class PostController {
     private final PostService postService;
+    private final LikeService likeService;
     @GetMapping("/save")
     public String saveForm(){
         return "save";
@@ -53,6 +56,12 @@ public class PostController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         postService.delete(id);
+        return "redirect:/post/";
+    }
+
+    @PostMapping("/like")
+    public String like(@RequestBody LikeRequestDto likeRequestDto) {
+        likeService.likeBoard(likeRequestDto);
         return "redirect:/post/";
     }
 }
