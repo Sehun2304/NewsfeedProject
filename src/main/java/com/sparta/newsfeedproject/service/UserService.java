@@ -56,16 +56,34 @@ public class UserService {
 
     }
 
-
-    public UserResponseDto getUser(Long id){
+    public UserResponseDto viewUser(Long id){
         User user = findUser(id);
         return new UserResponseDto(user);
     }
 
 
+
     public ResponseEntity<ApiResponseDto> updateUser(Long id, UpdateRequestDto updateRequestDto) {
-        return null;
+    Optional<User> optionalUser = userRepository.findById(id);
+
+    if (!optionalUser.isPresent()) {
+        throw new IllegalArgumentException("해당 ID의 사용자를 찾을 수 없습니다.");
     }
+
+    User updateUser = optionalUser.get();
+
+    if (!updateRequestDto.getPassword().equals(updateRequestDto.getCheckPassword())) {
+        throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+    }
+
+    String newIntroduce = updateRequestDto.getNewIntroduce();
+    updateUser.setIntroduce(newIntroduce);
+
+    userRepository.save(updateUser);
+
+    return ResponseEntity.ok(new ApiResponseDto());
+}
+
 
     private User findUser(Long id){
         return userRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("잘못된 유저입니다"));
