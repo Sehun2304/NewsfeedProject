@@ -22,7 +22,7 @@ public class LikeService {
     private final PostRepository postRepository;
 
     @Transactional
-    public void likeBoard(LikeRequestDto likeRequestDTO) {
+    public void likeBoard(Long id) {
 
 //        User user = userRepository.findById(likeRequestDTO.getUserId())
 //                .orElseThrow(() -> new NullPointerException("Could not found user id"));
@@ -33,7 +33,7 @@ public class LikeService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(authentication.getName());
 
-        PostEntity post = postRepository.findById(likeRequestDTO.getPostId())
+        PostEntity post = postRepository.findById(id)
                 .orElseThrow(() -> new NullPointerException("Could not found board id"));
 
         // 이미 해당 게시글에 좋아요를 누른 아이디인지 체크

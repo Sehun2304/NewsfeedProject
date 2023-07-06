@@ -66,9 +66,9 @@ public class PostController {
         return "redirect:/post/";
     }
 
-    @PostMapping("/like")
-    public String like(@RequestBody LikeRequestDto likeRequestDto) {
-        likeService.likeBoard(likeRequestDto);
+    @PostMapping("/like/{id}")
+    public String like(@PathVariable Long id) {
+        likeService.likeBoard(id);
         return "redirect:/post/";
     }
 
