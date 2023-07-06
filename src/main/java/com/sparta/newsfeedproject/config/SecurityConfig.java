@@ -63,13 +63,13 @@ public class SecurityConfig {
                         authorizeHttpRequests
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // resources 접근 허용 설정
                                 .requestMatchers("/register").permitAll()
-                                .requestMatchers("/post/login-page").permitAll()
+                                .requestMatchers("/login-page").permitAll()
                                 .requestMatchers("/**").permitAll()
 //                                .anyRequest().authenticated() //api 정리가 되지 않아서 일단 모두 허용
                 )
                 .formLogin(formLogin ->
                         formLogin
-                                .loginPage("/post/login-page").permitAll()
+                                .loginPage("/login-page").permitAll()
                 )
 
                 .logout(logout -> logout
