@@ -63,7 +63,7 @@ public class UserService {
 
 
 
-    public static ResponseEntity<ApiResponseDto> updateUser(Long id, UpdateRequestDto updateRequestDto) {
+    public ResponseEntity<ApiResponseDto> updateUser(Long id, UpdateRequestDto updateRequestDto) {
     Optional<User> optionalUser = userRepository.findById(id);
 
     if (!optionalUser.isPresent()) {
