@@ -1,7 +1,6 @@
 package com.sparta.newsfeedproject.controller;
 
 import com.sparta.newsfeedproject.dto.ApiResponseDto;
-import com.sparta.newsfeedproject.dto.PassUpdateDto;
 import com.sparta.newsfeedproject.dto.UpdateRequestDto;
 import com.sparta.newsfeedproject.dto.UserResponseDto;
 import com.sparta.newsfeedproject.service.UserService;
@@ -34,9 +33,9 @@ public class ProfileController {
     //비밀번호 수정
 
     @PatchMapping("/{id}/pass")
-    public String updatePass(@PathVariable Long id,@RequestBody PassUpdateDto passUpdateDto){
+    public ResponseEntity<ApiResponseDto> updatePass(@PathVariable Long id,@RequestBody UpdateRequestDto updateRequestDto){
 
-        return  null;
+        return  userService.updatePass(id, updateRequestDto);
     }
     }
 

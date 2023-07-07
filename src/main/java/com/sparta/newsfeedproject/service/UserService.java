@@ -62,7 +62,7 @@ public class UserService {
     }
 
 
-
+    //프로필 수정 (자기소개만)
     public ResponseEntity<ApiResponseDto> updateUser(Long id, UpdateRequestDto updateRequestDto) {
     Optional<User> optionalUser = userRepository.findById(id);
 
@@ -72,9 +72,9 @@ public class UserService {
 
     User updateUser = optionalUser.get();
 
-    if (!updateRequestDto.getPassword().equals(updateRequestDto.getCheckPassword())) {
-        throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
-    }
+        if (!passwordEncoder.matches(updateRequestDto.getPassword(), updateRequestDto.getCheckPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
 
     String newIntroduce = updateRequestDto.getNewIntroduce();
     updateUser.setIntroduce(newIntroduce);
@@ -83,6 +83,26 @@ public class UserService {
 
     return ResponseEntity.ok(new ApiResponseDto());
 }
+
+    //비밀번호 변경
+    public ResponseEntity<ApiResponseDto> updatePass(Long id, UpdateRequestDto updateRequestDto) {
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if (!optionalUser.isPresent()) {
+            throw new IllegalArgumentException("해당 ID의 사용자를 찾을 수 없습니다.");
+        }
+
+        User updateUser = optionalUser.get();
+
+        if (!passwordEncoder.matches(updateRequestDto.getPassword(), updateRequestDto.getCheckPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        String newPassword = updateRequestDto.getNewPassword();
+        updateUser.setPassword(newPassword);
+
+        userRepository.save(updateUser);
+        return ResponseEntity.ok(new ApiResponseDto());}
 
 
     private User findUser(Long id){
